@@ -2,9 +2,7 @@
 
 A production-grade, distributed email scheduling platform built with Express.js, TypeScript, BullMQ delayed queues on Redis, PostgreSQL (Prisma ORM), Elasticsearch full-text search, Ethereal SMTP delivery, Google OAuth 2.0, Slack rate-limit alert notifications, and a modern Next.js 14 dashboard.
 
-- **Live Deployment**: _[Placeholder: https://your-app.duckdns.org]_
-- **Demo Video (Max 5 mins)**: _[Placeholder: YouTube / Loom / Drive link]_
-- **Bull Board Queue Dashboard**: `http://localhost:4000/admin/queues` (Local) 
+- **Live Deployment**: https://reachinbox-scheduler.duckdns.org/
 
 ---
 
@@ -170,7 +168,7 @@ Ethereal is a zero-cost fake SMTP service used for realistic email delivery test
 ## Getting Started
 
 ### Prerequisites
-- Node.js (v18 or higher)
+- Node.js (v22)
 - Docker & Docker Compose
 - Git
 
