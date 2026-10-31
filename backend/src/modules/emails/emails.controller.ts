@@ -36,12 +36,14 @@ export async function scheduleHandler(
 }
 
 export async function getScheduledHandler(
-  _req: Request,
+  req: Request,
   res: Response,
   next: NextFunction
 ) {
   try {
-    const emails = await emailsService.getScheduledEmails();
+    const authReq = req as AuthenticatedRequest;
+    const userId = authReq.user?.id;
+    const emails = await emailsService.getScheduledEmails(userId);
     return res.json({
       count: emails.length,
       emails,
@@ -52,12 +54,14 @@ export async function getScheduledHandler(
 }
 
 export async function getSentHandler(
-  _req: Request,
+  req: Request,
   res: Response,
   next: NextFunction
 ) {
   try {
-    const emails = await emailsService.getSentEmails();
+    const authReq = req as AuthenticatedRequest;
+    const userId = authReq.user?.id;
+    const emails = await emailsService.getSentEmails(userId);
     return res.json({
       count: emails.length,
       emails,
@@ -74,7 +78,9 @@ export async function searchHandler(
 ) {
   try {
     const q = (req.query.q as string) || "";
-    const results = await searchEmails(q);
+    const authReq = req as AuthenticatedRequest;
+    const userId = authReq.user?.id;
+    const results = await searchEmails(q, userId);
     return res.json({
       query: q,
       total: results.total,

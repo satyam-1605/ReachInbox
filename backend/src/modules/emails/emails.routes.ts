@@ -10,7 +10,7 @@ import { optionalAuth } from "../auth/auth.middleware.js";
 export const emailsRouter = Router();
 
 emailsRouter.post("/schedule", optionalAuth, scheduleHandler);
-emailsRouter.get("/scheduled", getScheduledHandler);
-emailsRouter.get("/sent", getSentHandler);
-emailsRouter.get("/search", searchHandler);
+emailsRouter.get("/scheduled", optionalAuth, getScheduledHandler);
+emailsRouter.get("/sent", optionalAuth, getSentHandler);
+emailsRouter.get("/search", optionalAuth, searchHandler);
 
