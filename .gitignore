@@ -1,0 +1,53 @@
+# Dependencies
+node_modules/
+*/node_modules/
+.pnp
+.pnp.js
+
+# Environment variables & secrets (keep example templates committed)
+.env
+.env.*
+!.env.example
+!.env.test.example
+!.env.local.example
+
+# Production & Build outputs
+dist/
+*/dist/
+.next/
+*/.next/
+out/
+build/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Debug & system logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Test coverage
+coverage/
+.nyc_output/
+
+# OS metadata & temporary files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Editor & IDE configs
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+AGENTS.md
+
+
+plan.md
+
