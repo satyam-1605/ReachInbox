@@ -1,0 +1,23 @@
+# ReachInbox Email Job Scheduler - Caddy Reverse Proxy Configuration
+# Replace {$DOMAIN:localhost} with your domain (e.g. email.yourdomain.com) or VM public IP.
+# When a valid domain is supplied, Caddy automatically provisions and manages Let's Encrypt SSL.
+
+{$DOMAIN:localhost} {
+    # Backend Express API, OAuth callbacks, Slack, Bull Board, and Health check
+    @backend {
+        path /auth/*
+        path /emails/*
+        path /slack/*
+        path /admin/*
+        path /health
+    }
+    handle @backend {
+        reverse_proxy localhost:4000
+    }
+
+    # Next.js Frontend Dashboard (UI, Pages, static assets like /_next/*)
+    handle {
+        reverse_proxy localhost:3000
+    }
+}
+

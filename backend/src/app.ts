@@ -4,9 +4,12 @@ import cookieParser from "cookie-parser";
 import { prisma } from "./config/db.js";
 import { env } from "./config/env.js";
 import { apiRouter } from "./routes/index.js";
-import { bullBoardRouter } from "./queue/bullBoard.js";
+import { bullBoardRouter, bullBoardAuthMiddleware } from "./queue/bullBoard.js";
 
 export const app = express();
+
+// Trust reverse proxy (Caddy / Nginx) for secure cookies and correct client IP
+app.set("trust proxy", 1);
 
 app.use(
   cors({
@@ -17,8 +20,8 @@ app.use(
 app.use(express.json());
 app.use(cookieParser());
 
-// Bull Board UI
-app.use("/admin/queues", bullBoardRouter);
+// Bull Board UI with basic auth
+app.use("/admin/queues", bullBoardAuthMiddleware, bullBoardRouter);
 
 // API routes
 app.use("/", apiRouter);

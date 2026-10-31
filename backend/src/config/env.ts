@@ -25,6 +25,25 @@ export const envSchema = z.object({
   ELASTICSEARCH_NODE: z.string().default("http://localhost:9200"),
   ETHEREAL_USER: z.string().optional(),
   ETHEREAL_PASS: z.string().optional(),
+  BULL_BOARD_USER: z.string().optional(),
+  BULL_BOARD_PASS: z.string().optional(),
+}).superRefine((data, ctx) => {
+  if (data.NODE_ENV === "production") {
+    if (!data.BULL_BOARD_USER) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["BULL_BOARD_USER"],
+        message: "BULL_BOARD_USER is required in production mode",
+      });
+    }
+    if (!data.BULL_BOARD_PASS) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["BULL_BOARD_PASS"],
+        message: "BULL_BOARD_PASS is required in production mode",
+      });
+    }
+  }
 });
 
 export type Env = z.infer<typeof envSchema>;

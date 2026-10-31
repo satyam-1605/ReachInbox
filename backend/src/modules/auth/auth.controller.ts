@@ -30,7 +30,7 @@ export async function googleCallbackHandler(
 
     res.cookie(AUTH_COOKIE_NAME, token, {
       httpOnly: true,
-      secure: env.NODE_ENV === "production",
+      secure: req.secure,
       sameSite: "lax",
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     });
